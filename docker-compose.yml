@@ -6,7 +6,7 @@ services:
     build:
       context: ./backend
     volumes:
-      - ./backend:/app
+      - ./backend/villasPlataform:/villasPlataform  # Referência direta ao diretório correto
     ports:
       - "8000:8000"
     environment:
@@ -19,13 +19,10 @@ services:
   frontend:
     build:
       context: ./frontend
-    volumes:
-      - ./frontend:/app
     ports:
       - "3000:3000"
     depends_on:
       - backend
-
   # Banco de dados (PostgreSQL)
   db:
     image: postgres:14-alpine

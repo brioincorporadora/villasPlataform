@@ -1,8 +1,8 @@
 # Usando a imagem oficial do Python
 FROM python:3.13-slim
 
-# Diretório de trabalho dentro do contêiner
-WORKDIR /app
+# Definir o diretório de trabalho dentro do contêiner
+WORKDIR /villasPlataform
 
 # Instalar dependências do sistema (necessário para pacotes como psycopg2, pillow, etc.)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -22,16 +22,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copiar o arquivo requirements.txt para dentro do contêiner
-COPY ./requirements.txt /app/
+COPY villasPlataform/requirements.txt /villasPlataform/
 
 # Instalar as dependências do projeto
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r /villasPlataform/requirements.txt
 
 # Copiar o código do projeto para dentro do contêiner
-COPY . /app/
+COPY villasPlataform /villasPlataform/
 
 # Expor a porta onde o servidor Django vai rodar
 EXPOSE 8000
 
 # Rodar o servidor Django (para desenvolvimento)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "/villasPlataform/manage.py", "runserver", "0.0.0.0:8000"]

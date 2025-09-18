@@ -1,8 +1,7 @@
 # Usando a imagem oficial do Node.js
 FROM node:20-alpine AS deps
-WORKDIR /app
 
-# Diretório de trabalho dentro do contêiner
+# Definir o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
 # Copiar os arquivos package.json e package-lock.json (se houver)
